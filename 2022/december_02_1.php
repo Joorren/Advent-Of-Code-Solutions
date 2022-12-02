@@ -5,42 +5,31 @@ $score = 0;
 
 foreach ($csv as $key => $line) {
     $round = explode(' ', $line[0]);
-    if (
-        (
-            $round[0] === 'A' &&
-            $round[1] === 'X'
-        ) ||
-        (
-            $round[0] === 'B' &&
-            $round[1] === 'Y'
-        ) ||
-        (
-            $round[0] === 'C' &&
-            $round[1] === 'Z'
-        )
-    ) {
-        $score += 3;
-    } elseif (
-        (
-            $round[0] === 'A' &&
-            $round[1] === 'Y'
-        ) ||
-        (
-            $round[0] === 'B' &&
-            $round[1] === 'Z'
-        ) ||
-        (
-            $round[0] === 'C' &&
-            $round[1] === 'X'
-        )
-    ) {
-        $score += 6;
-    }
-
-    $score += match ($round[1]) {
-        'X' => 1,
-        'Y' => 2,
-        'Z' => 3,
+    match ($round[1]) {
+        'X' => [
+            $score += 1,
+            match ($round[0]) {
+                'A' => $score += 3,
+                'B' => $score += 0,
+                'C' => $score += 6,
+            },
+        ],
+        'Y' => [
+            $score += 2,
+            match ($round[0]) {
+                'A' => $score += 6,
+                'B' => $score += 3,
+                'C' => $score += 0,
+            },
+        ],
+        'Z' => [
+            $score += 3,
+            match ($round[0]) {
+                'A' => $score += 0,
+                'B' => $score += 6,
+                'C' => $score += 3,
+            },
+        ],
     };
 }
 
