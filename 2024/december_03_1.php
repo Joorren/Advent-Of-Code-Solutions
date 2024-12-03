@@ -9,8 +9,6 @@ foreach ($file as $key => $line) {
 
     for ($i = 0; $i < count($matches[0]); $i++) {
         $total += $matches[1][$i] * $matches[2][$i];
-        print_r($matches[1][$i] . ' * ' . $matches[2][$i] . ' = ' . $matches[1][$i] * $matches[2][$i] . PHP_EOL);
-        print_r('Total: ' . $total . PHP_EOL);
     }
 }
 
